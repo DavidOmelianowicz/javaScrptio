@@ -28,4 +28,8 @@ function handleKeyPress(e) {
 function refresh() {
   ball.style.left = position + "px";
   ball.style.top = verticalPosition + "px";
+
+  ball.style.backgroundColor = `rgb(${Math.floor(
+    Math.random() * 256
+  )},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
 }
