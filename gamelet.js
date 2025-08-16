@@ -5,16 +5,16 @@ let verticalPosition = 0;
 
 function handleKeyPress(e) {
   if (e.code === "ArrowLeft") {
-    position = position - 10;
+    position = position - 20;
   }
   if (e.code === "ArrowRight") {
-    position = position + 10;
+    position = position + 20;
   }
   if (e.code === "ArrowUp") {
-    verticalPosition = verticalPosition - 10;
+    verticalPosition = verticalPosition - 20;
   }
   if (e.code === "ArrowDown") {
-    verticalPosition = verticalPosition + 10;
+    verticalPosition = verticalPosition + 20;
   }
 
   if (position < 0) {
