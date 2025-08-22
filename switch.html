@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <mete http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Finder</title>
+</head>
+<body>
+    <div id="massage"></div>
+    <script>
+        const dt = new Date();
+        const month = dt.getMonth();
+        let msg;
+        switch (month) {
+            case 0:
+                msg = 'jan 4 is spaghetti day';
+                break;
+            case 1:
+                msg = 'feb 9 is pizza day';
+                break;
+            case 2:
+                msg = 'mar 14 is pi day';
+                break;
+            case 7:
+                msg = 'aug 22 is cinco de mayo';
+                break;
+            default:
+                msg = 'not a holiday month';    
+        }
+        const el = document.getElementById('massage');
+        el.textContent = msg;
+    </script>
+</body>
+</html>
