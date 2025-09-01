@@ -23,5 +23,23 @@
         <div class="face bottom">Bottom</div>
       </div>
     </div>
+    <script>
+      const cube = document.querySelector(".cube");
+      let angleX = 0;
+      let angleY = 0;
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowUp") {
+          angleX -= 10;
+        } else if (event.key === "ArrowDown") {
+          angleX += 10;
+        } else if (event.key === "ArrowLeft") {
+          angleY -= 10;
+        } else if (event.key === "ArrowRight") {
+          angleY += 10;
+        }
+        cube.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+      });
+    </script>
   </body>
 </html>

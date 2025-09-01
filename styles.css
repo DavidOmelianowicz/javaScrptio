@@ -13,12 +13,52 @@ body {
   height: 20px;
   position: relative;
 }
-.cube {
-  position: relative;
-  margin: 100px auto;
+#main {
+  perspective: 600px;
   width: 200px;
   height: 200px;
+  margin: 40px auto;
+}
+
+.cube {
+  position: relative;
+  width: 100px;
+  height: 100px;
   transform-style: preserve-3d;
-  transform: rotateX(-20deg) rotateY(20deg);
-  animation: rotate 10s infinite linear;
+  transform: rotateX(-30deg) rotateY(-30deg);
+  margin: 0 auto;
+  transition: transform 1s;
+}
+
+.face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(0, 128, 255, 0.7);
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.front {
+  transform: translateZ(50px);
+}
+.back {
+  transform: rotateY(180deg) translateZ(50px);
+}
+.right {
+  transform: rotateY(90deg) translateZ(50px);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(50px);
+}
+.top {
+  transform: rotateX(90deg) translateZ(50px);
+}
+.bottom {
+  transform: rotateX(-90deg) translateZ(50px);
 }
