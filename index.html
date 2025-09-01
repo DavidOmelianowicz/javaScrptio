@@ -4,29 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
-    <style>
-      body {
-        text-align: center;
-        margin: 0;
-        overflow: hidden;
-        background-color: rgb(48, 47, 47);
-        color: white;
-        font-family: Arial, sans-serif;
-      }
-      #ball {
-        background-color: rgb(0, 21, 255);
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        position: relative;
-      }
-    </style>
   </head>
+
   <body>
     <div id="ball"></div>
     <script src="gamelet.js"></script>
     <h1>Gamelet Example</h1>
     <!-- This is a simple gamelet example that animates a ball. -->
+    <div id="main">
+      <div class="cube">
+        <div class="face front">Front</div>
+        <div class="face back">Back</div>
+        <div class="face right">Right</div>
+        <div class="face left">Left</div>
+        <div class="face top">Top</div>
+        <div class="face bottom">Bottom</div>
+      </div>
+    </div>
   </body>
 </html>
