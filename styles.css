@@ -13,11 +13,24 @@ body {
   height: 20px;
   position: relative;
 }
-#main {
+#main-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cube-container {
+  border: solid 2px white;
+  border-radius: 10%;
   perspective: 600px;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   margin: 40px auto;
+  background-color: rgb(171, 74, 79);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cube {
@@ -28,6 +41,19 @@ body {
   transform: rotateX(-30deg) rotateY(-30deg);
   margin: 0 auto;
   transition: transform 1s;
+}
+
+@keyframes spinCube {
+  0% {
+    transform: rotateX(-30deg) rotateY(-30deg);
+  }
+  100% {
+    transform: rotateX(-30deg) rotateY(330deg);
+  }
+}
+
+.cube:hover {
+  animation: spinCube 1s linear infinite;
 }
 
 .face {
