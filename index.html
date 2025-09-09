@@ -11,10 +11,10 @@
   <body>
     <div id="ball"></div>
     <script src="gamelet.js"></script>
-    <h1>Random Chaos</h1>
+    <h1 id="title">Random Chaos !</h1>
     <!-- This is a simple gamelet example that animates a ball. -->
     <div id="main-container">
-      <div class="item-container">
+      <div class="item-container" id="cube-container">
         <div class="cube">
           <div class="face front">Front</div>
           <div class="face back">Back</div>
@@ -24,7 +24,7 @@
           <div class="face bottom">Bottom</div>
         </div>
       </div>
-      <div class="item-container">
+      <div class="item-container" id="quiz-container">
         <h1>Quiz Time!</h1>
         <br />
         <p>
@@ -32,12 +32,14 @@
           Which Street Fighter character wears a white outfit and red head band?
         </p>
         <select type="dropdown" id="quiz-dropdown">
-          <option>Ryu</option>
           <option>Ken</option>
+          <option>Ryu</option>
           <option>Chun Li</option>
           <option>Guile</option>
         </select>
       </div>
+      <div class="item-container"></div>
+      <div class="item-container"></div>
       <div class="item-container"></div>
       <div class="item-container"></div>
       <div class="item-container"></div>
