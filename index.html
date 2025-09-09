@@ -10,7 +10,7 @@
 
   <body>
     <div id="ball"></div>
-    <script src="gamelet.js"></script>
+
     <h1 id="title">Random Chaos !</h1>
     <!-- This is a simple gamelet example that animates a ball. -->
     <div id="main-container">
@@ -38,7 +38,10 @@
           <option>Guile</option>
         </select>
       </div>
-      <div class="item-container"></div>
+      <div class="item-container" id="image-container">
+        <div id="img-box"></div>
+        <button id="img-btn">Change Image</button>
+      </div>
       <div class="item-container"></div>
       <div class="item-container"></div>
       <div class="item-container"></div>
@@ -69,5 +72,6 @@
         cube.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
       });
     </script>
+    <script src="gamelet.js"></script>
   </body>
 </html>

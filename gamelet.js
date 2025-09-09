@@ -33,3 +33,11 @@ function refresh() {
     Math.random() * 256
   )},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
 }
+
+//random imges
+const imgBox = document.getElementById("img-box");
+const imgBtn = document.getElementById("img-btn");
+
+imgBtn.addEventListener("click", () => {
+  imgBox.style.backgroundImage = `url('https://picsum.photos/seed/${Math.random()}/800')`;
+});
