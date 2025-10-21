@@ -1,23 +1,17 @@
-let lightIndex = 0;
+const memeArray = [
+  "https://i.imgur.com/bSi4xLb.png",
+  "https://i.imgur.com/6y0G7N0.png",
+  "https://i.imgur.com/LXnRao1.png",
+  "https://i.imgur.com/Qqoxh1N.png",
+];
 
-function changeLight() {
-  const redLight = document.getElementById("red");
-  const yellowLight = document.getElementById("yellow");
-  const greenLight = document.getElementById("green");
+const captionArray = [
+  "When you finally understand recursion.",
+  "Debugging: Where you spend hours fixing a bug only to find out it was a typo.",
+  "That moment when your code works on the first try.",
+  "When you realize you've been coding for 5 hours straight.",
+];
 
-  if (lightIndex === 0) {
-    redLight.style.backgroundColor = "#ff0000";
-    yellowLight.style.backgroundColor = "";
-    greenLight.style.backgroundColor = "";
-  } else if (lightIndex === 1) {
-    yellowLight.style.backgroundColor = "#ffff00";
-    redLight.style.backgroundColor = "";
-    greenLight.style.backgroundColor = "";
-  } else {
-    greenLight.style.backgroundColor = "#00ff00";
-    redLight.style.backgroundColor = "";
-    yellowLight.style.backgroundColor = "";
-  }
-
-  lightIndex = (lightIndex + 1) % 3;
-}
+const randomMeme = document.getElementById("random-meme");
+const randomCaption = document.getElementById("random-caption");
+const generatorButton = document.getElementById("generator-button");
