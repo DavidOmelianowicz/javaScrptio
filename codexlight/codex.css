@@ -5,6 +5,7 @@ body {
 #generator-button {
   padding: 10px;
   border: 2px solid black;
+  background-color: lightsalmon;
   border-radius: 5px;
   font-weight: bolder;
   font-size: xx-large;
@@ -12,9 +13,11 @@ body {
 
 #meme-wrapper {
   border: 4px solid black;
+  border-radius: 2%;
+  background-color: lightsalmon;
   width: 700px;
-  height: 500px;
-  padding: 5px;
+  height: 550px;
+  padding: 20px;
   margin: 15px auto;
 }
 
