@@ -19,7 +19,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image("background", "assests/backgroung.png");
+  this.load.image("background", "assets/background.png");
   this.load.image("road", "assets/road.png");
   this.load.image("column", "assets/column.png");
   this.load.spritesheet("bird", "assets/bird.png", {
