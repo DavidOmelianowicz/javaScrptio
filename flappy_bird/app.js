@@ -1,3 +1,4 @@
+// config how the game runs
 let config = {
   renderer: Phaser.AUTO,
   width: 800,
@@ -17,7 +18,7 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
-
+// load assets for the game
 function preload() {
   this.load.image("background", "assets/background.png");
   this.load.image("road", "assets/road.png");
@@ -28,6 +29,10 @@ function preload() {
   });
 }
 
+let bird;
+let hasLanded = false;
+
+// create game objects
 function create() {
   const background = this.add.image(0, 0, "background").setOrigin(0, 0);
   const roads = this.physics.add.staticGroup();
@@ -43,6 +48,16 @@ function create() {
   });
 
   const road = roads.create(400, 568, "road").setScale(2).refreshBody();
+
+  // create the bird sprite
+  bird = this.physics.add.sprite(0, 50, "bird").setScale(2);
+  bird.setBounce(0.2);
+  bird.setCollideWorldBounds(true);
+
+  this.physics.add.collider(bird, road);
+
+  this.physics.add.overlap(bird, road, () => (hasLanded = true), null, this);
+  this.physics.add.collider(bird, road);
 }
 
 function update() {}
