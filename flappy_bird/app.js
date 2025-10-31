@@ -28,9 +28,12 @@ function preload() {
     frameHeight: 96,
   });
 }
-
+// define game variables
 let bird;
 let hasLanded = false;
+let cursors;
+let hasBumped = false;
+let isGameStarted = false;
 
 // create game objects
 function create() {
@@ -47,6 +50,9 @@ function create() {
     setXY: { x: 350, y: 400, stepX: 300 },
   });
 
+  this.physics.add.collider(bird, topColumns);
+  this.physics.add.collider(bird, bottomColumns);
+
   const road = roads.create(400, 568, "road").setScale(2).refreshBody();
 
   // create the bird sprite
@@ -54,10 +60,47 @@ function create() {
   bird.setBounce(0.2);
   bird.setCollideWorldBounds(true);
 
+  // collisions
   this.physics.add.collider(bird, road);
-
   this.physics.add.overlap(bird, road, () => (hasLanded = true), null, this);
   this.physics.add.collider(bird, road);
+  this.physics.add.overlap(
+    bird,
+    topColumns,
+    () => (hasBumped = true),
+    null,
+    this
+  );
+  this.physics.add.overlap(
+    bird,
+    bottomColumns,
+    () => (hasBumped = true),
+    null,
+    this
+  );
+  this.physics.add.collider(bird, topColumns);
+  this.physics.add.collider(bird, bottomColumns);
+
+  // bird movement
+  cursors = this.input.keyboard.createCursorKeys();
 }
 
-function update() {}
+function update() {
+  // start the game on spacebar press
+  if (cursors.space.isDown && !isGameStarted) {
+    isGameStarted = true;
+  }
+  if (!isGameStarted) {
+    bird.setVelocityY(-160);
+  }
+
+  if (cursors.up.isDown && !hasLanded && !hasBumped) {
+    bird.setVelocityY(-160);
+  }
+  if (!hasLanded || !hasBumped) {
+    bird.body.setVelocityX = 50;
+  }
+  if (hasLanded || hasBumped || !isGameStarted) {
+    bird.body.setVelocityX = 0;
+  }
+}
