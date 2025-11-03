@@ -34,6 +34,7 @@ let hasLanded = false;
 let cursors;
 let hasBumped = false;
 let isGameStarted = false;
+let messageToPlayer;
 
 // create game objects
 function create() {
@@ -49,7 +50,16 @@ function create() {
     repeat: 1,
     setXY: { x: 350, y: 400, stepX: 300 },
   });
+
   const road = roads.create(400, 568, "road").setScale(2).refreshBody();
+  // display initial instructions
+  messageToPlayer = this.add.text(0, 0, "Instructions: Press space to start", {
+    fontFamily: '"comic Sans MS", Times, serif',
+    fontSize: "20px",
+    color: "white",
+    backgroundColor: "black",
+  });
+  Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, 0, 50);
 
   // create the bird sprite
   bird = this.physics.add.sprite(0, 50, "bird").setScale(2);
@@ -59,9 +69,6 @@ function create() {
   // collisions
   this.physics.add.collider(bird, topColumns);
   this.physics.add.collider(bird, bottomColumns);
-  this.physics.add.collider(bird, road);
-  this.physics.add.overlap(bird, road, () => (hasLanded = true), null, this);
-  this.physics.add.collider(bird, road);
   this.physics.add.overlap(
     bird,
     topColumns,
@@ -76,14 +83,31 @@ function create() {
     null,
     this
   );
-  this.physics.add.collider(bird, topColumns);
-  this.physics.add.collider(bird, bottomColumns);
+
+  this.physics.add.overlap(bird, road, () => (hasLanded = true), null, this);
+  this.physics.add.collider(bird, road);
 
   // bird movement
   cursors = this.input.keyboard.createCursorKeys();
 }
 
 function update() {
+  // display instructions at the start
+  if (cursors.space.isDown && !isGameStarted) {
+    isGameStarted = true;
+    messageToPlayer.text =
+      'Instructions: Press the "^" button to stay upright\nAnd don\'t hit the columns or ground';
+  }
+
+  if (hasLanded || hasBumped) {
+    messageToPlayer.text = `Oh no! You crashed!`;
+  }
+
+  if (bird.x > 750) {
+    bird.velocityY(40);
+    messageToPlayer.text = `Congratulations! You win!`;
+  }
+
   // start the game on spacebar press
   if (cursors.space.isDown && !isGameStarted) {
     isGameStarted = true;
@@ -98,10 +122,10 @@ function update() {
   }
   // bird forward movement
   if (!hasLanded || !hasBumped) {
-    bird.body.setVelocityX(50);
+    bird.body.velocity.x = 50;
   }
   // stop bird movement on landing or bumping
   if (hasLanded || hasBumped || !isGameStarted) {
-    bird.body.setVelocityX(0);
+    bird.body.velocity.x = 0;
   }
 }
