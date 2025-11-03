@@ -98,14 +98,13 @@ function update() {
     messageToPlayer.text =
       'Instructions: Press the "^" button to stay upright\nAnd don\'t hit the columns or ground';
   }
+  if (bird.x > 750) {
+    bird.setVelocityY(0);
+    messageToPlayer.text = `Congratulations! You win!`;
+  }
 
   if (hasLanded || hasBumped) {
     messageToPlayer.text = `Oh no! You crashed!`;
-  }
-
-  if (bird.x > 750) {
-    bird.velocityY(40);
-    messageToPlayer.text = `Congratulations! You win!`;
   }
 
   // start the game on spacebar press
