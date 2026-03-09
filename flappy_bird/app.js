@@ -34,7 +34,9 @@ let hasLanded = false;
 let cursors;
 let hasBumped = false;
 let isGameStarted = false;
+let isGameOver = false;
 let messageToPlayer;
+// sceneRef removed; not needed since `this` can be used in update
 
 // create game objects
 function create() {
@@ -72,19 +74,52 @@ function create() {
   this.physics.add.overlap(
     bird,
     topColumns,
-    () => (hasBumped = true),
+    () => {
+      hasBumped = true;
+      console.log("bumped top");
+      if (!isGameOver) {
+        isGameOver = true;
+        isGameStarted = false;
+        messageToPlayer.text = `Game Over! You crashed!`;
+        this.physics.pause();
+      }
+    },
     null,
-    this
+    this,
   );
   this.physics.add.overlap(
     bird,
     bottomColumns,
-    () => (hasBumped = true),
+    () => {
+      hasBumped = true;
+      console.log("bumped bottom");
+      if (!isGameOver) {
+        isGameOver = true;
+        isGameStarted = false;
+        messageToPlayer.text = `Game Over! You crashed!`;
+        this.physics.pause();
+      }
+    },
     null,
-    this
+    this,
   );
 
-  this.physics.add.overlap(bird, road, () => (hasLanded = true), null, this);
+  this.physics.add.overlap(
+    bird,
+    road,
+    () => {
+      hasLanded = true;
+      console.log("landed");
+      if (!isGameOver) {
+        isGameOver = true;
+        isGameStarted = false;
+        messageToPlayer.text = `Game Over! You crashed!`;
+        this.physics.pause();
+      }
+    },
+    null,
+    this,
+  );
   this.physics.add.collider(bird, road);
 
   // bird movement
@@ -92,8 +127,13 @@ function create() {
 }
 
 function update() {
+  // if the game is over, don't run any more logic (message already set)
+  if (isGameOver) {
+    return;
+  }
+
   // display instructions at the start
-  if (cursors.space.isDown && !isGameStarted) {
+  if (cursors.space.isDown && !isGameStarted && !isGameOver) {
     isGameStarted = true;
     messageToPlayer.text =
       'Instructions: Press the "^" button to stay upright\nAnd don\'t hit the columns or ground';
@@ -104,11 +144,23 @@ function update() {
   }
 
   if (hasLanded || hasBumped) {
-    messageToPlayer.text = `Oh no! You crashed!`;
+    // trigger game over only once
+    if (!isGameOver) {
+      isGameOver = true;
+      isGameStarted = false;
+      messageToPlayer.text = `Game Over! You crashed!`;
+      this.physics.pause();
+      console.log(
+        "game over triggered - hasBumped:",
+        hasBumped,
+        "hasLanded:",
+        hasLanded,
+      );
+    }
   }
 
-  // start the game on spacebar press
-  if (cursors.space.isDown && !isGameStarted) {
+  // start the game on spacebar press (ignore if game over)
+  if (cursors.space.isDown && !isGameStarted && !isGameOver) {
     isGameStarted = true;
   }
   // bird starting position
@@ -119,12 +171,11 @@ function update() {
   if (cursors.up.isDown && !hasLanded && !hasBumped) {
     bird.setVelocityY(-160);
   }
-  // bird forward movement
-  if (!hasLanded || !hasBumped) {
+  // bird forward movement – only when the game has started and the bird hasn't crashed or landed
+  if (isGameStarted && !hasLanded && !hasBumped) {
     bird.body.velocity.x = 50;
-  }
-  // stop bird movement on landing or bumping
-  if (hasLanded || hasBumped || !isGameStarted) {
+  } else {
+    // stop bird movement on landing, bumping, or before the game starts
     bird.body.velocity.x = 0;
   }
 }
