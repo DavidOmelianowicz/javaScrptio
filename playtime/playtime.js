@@ -24,6 +24,7 @@ const games = [
 const box = document.getElementById("box");
 
 addEventListener("click", () => {
-  box.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-  box.style.borderRadius = Math.floor(Math.random() * 50) + '%';
+  box.style.backgroundColor =
+    "#" + Math.floor(Math.random() * 16777215).toString(16);
+  box.style.borderRadius = Math.floor(Math.random() * 50) + "%";
 });
