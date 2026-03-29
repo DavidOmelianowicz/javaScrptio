@@ -22,37 +22,44 @@ function normalizeUnits(manifest) {
 }
 
 function validateManifest(manifest) {
+  const errors = {};
+
+  // Check containerId
   if (manifest.containerId === "" || manifest.containerId == null) {
-    manifest.containerId = "Missing";
-  } else if (typeof manifest.containerId !== "number") {
-    manifest.containerId = "Invalid";
+    errors.containerId = "Missing";
+  } else if (typeof manifest.containerId !== "string") {
+    errors.containerId = "Invalid";
   }
 
+  // Check destination
   if (manifest.destination === "" || manifest.destination == null) {
-    manifest.destination = "Missing";
+    errors.destination = "Missing";
   } else if (typeof manifest.destination !== "string") {
-    manifest.destination = "Invalid";
+    errors.destination = "Invalid";
   }
 
+  // Check weight
   if (manifest.weight === "" || manifest.weight == null) {
-    manifest.weight = "Missing";
-  } else if (typeof manifest.weight !== "number") {
-    manifest.weight = "Invalid";
+    errors.weight = "Missing";
+  } else if (typeof manifest.weight !== "number" || isNaN(manifest.weight)) {
+    errors.weight = "Invalid";
   }
 
+  // Check units
   if (manifest.units === "" || manifest.units == null) {
-    manifest.units = "Missing";
+    errors.units = "Missing";
   } else if (manifest.units !== "lbs" && manifest.units !== "kg") {
-    manifest.units = "Invalid";
+    errors.units = "Invalid";
   }
 
+  // Check hazmat
   if (manifest.hazmat === "" || manifest.hazmat == null) {
-    manifest.hazmat = "Missing";
+    errors.hazmat = "Missing";
   } else if (typeof manifest.hazmat !== "boolean") {
-    manifest.hazmat = "Invalid";
+    errors.hazmat = "Invalid";
   }
 
-  return manifest;
+  return errors;
 }
 
 console.log(normalizeUnits(manifest));
